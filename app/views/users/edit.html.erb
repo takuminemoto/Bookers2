@@ -24,8 +24,7 @@
 
           <div class="form-group">
            <%= f.label :introduction %>
-           <textarea class="form-control introduction" name="user[introduction]" id="user_introduction">
-           </textarea>
+           <%= f.text_area :introduction, autofocus: true, id:"inputName", placeholder:"感想"%>
           </div>
 
           <%= f.submit 'Update User', class: "btn btn-secondary" %>

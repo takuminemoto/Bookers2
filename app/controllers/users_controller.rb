@@ -14,8 +14,14 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-
+    if @user.id == current_user.id
+      render :edit
+    else
+      redirect_to user_path(current_user.id)
+    end
   end
+
+#仕上げのテスト 他人の画面のテスト 他人のユーザ情報編集画面 遷移できず、自分のユーザ詳細画面にリダイレクトされる
 
   def create
    user = User.new(user_params)

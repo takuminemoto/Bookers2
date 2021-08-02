@@ -7,11 +7,11 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
-      redirect_to book_path(@book), notice: 'successfully new posting'
+       redirect_to book_path(@book), notice: 'successfully new posting'
     else
-    @books = Book.all
-    @user = current_user
-    render :index
+      @books = Book.all
+      @user = current_user
+      render :index
     end
   end
 
@@ -35,6 +35,9 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    unless @book.user_id == current_user.id
+      redirect_to books_path
+    end
   end
 
   def update
@@ -43,9 +46,9 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to book_path(@book), notice: 'post update successfully'
     else
-    @books = Book.all
-    @user = current_user
-    render :index
+      @books = Book.all
+      @user = current_user
+      render :index
     end
   end
 
